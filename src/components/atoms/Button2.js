@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components'
+import { theme } from '../../theme/mainTheme'
 
-const Button = styled.button`
-	background-color: ${porps => (porps.secondary ? '#e6e6e6' : '#ffd82b')}; // po podanym propsie
+const Button2 = styled.button`
+padding: 0;
+	background-color: ${theme.secondary};
 	border: none;
 	width: ${({ secondary }) => (secondary ? '150px' : '220px')}; // po podanym propsie z destrukturyzacją
 	width: ${({ width }) => (width || '220px')}; // po podanym propsie z destrukturyzacją, po propsie
@@ -21,4 +23,4 @@ const Button = styled.button`
 	border-radius: 50px;
 `
 
-export default Button
+export default Button2
