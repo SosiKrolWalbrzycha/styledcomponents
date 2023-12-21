@@ -1,3 +1,4 @@
+import React from 'react';
 import Button from './Button.js';
 
 export default {
@@ -5,5 +6,19 @@ export default {
     component: Button,
 };
 
-export const Primary = () => <Button primary>Click me no1</Button>;
-export const Secondary = () => <Button secondary>Click me too no2</Button>;
+// Definicja szablonu dla Button
+const Template = (args) => <Button {...args} />;
+
+// Użycie szablonu do tworzenia historii dla Primary Button
+export const Primary = Template.bind({});
+Primary.args = {
+    primary: true,
+    children: 'Click me no1',
+};
+
+// Użycie szablonu do tworzenia historii dla Secondary Button
+export const Secondary = Template.bind({});
+Secondary.args = {
+    secondary: true,
+    children: 'Click me too no2',
+};

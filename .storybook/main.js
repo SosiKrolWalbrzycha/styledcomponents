@@ -20,5 +20,14 @@ const config = {
     autodocs: "tag",
   },
   staticDirs: ["..\\public"],
+
+  // Dodany fragment kodu do wyłączenia ESLint
+  webpackFinal: async (config) => {
+    config.module.rules = config.module.rules.filter(
+      (rule) => !(rule.use && rule.use.some((use) => use.loader && use.loader.includes('eslint-loader')))
+    );
+    return config;
+  },
 };
+
 export default config;

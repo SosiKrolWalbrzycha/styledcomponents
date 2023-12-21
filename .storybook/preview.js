@@ -1,4 +1,16 @@
 /** @type { import('@storybook/react').Preview } */
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../src/theme/mainTheme.js'; 
+
+const withThemeProvider = (Story, context) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Story {...context} />
+    </ThemeProvider>
+  );
+};
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,6 +21,7 @@ const preview = {
       },
     },
   },
+  decorators: [withThemeProvider],
 };
 
 export default preview;

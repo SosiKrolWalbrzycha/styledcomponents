@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { theme } from '../../theme/mainTheme'
+
 const Button = styled.button`
     padding: 0;
 	background-color: ${({theme}) => theme.primary}; 
@@ -10,12 +10,18 @@ const Button = styled.button`
     font-size: 16px;
     height: 47px;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color .3s;
+
+    &:hover {
+        background-color: ${({ theme }) => theme.grey200}; 
+    }
+
 
 	${({ secondary }) =>
 		secondary &&
 		css`
-        background-color: ${theme.secondary};
-        /* Ten sposob odwołania zadziała tylko gry ThemeProvider jest zastpiony eksportem, wyżej jest przez strzałkową */
+        background-color: ${({theme}) => theme.secondary}; 
         width: 105px;
 		font-size: 10px;
 		height: 30px;
