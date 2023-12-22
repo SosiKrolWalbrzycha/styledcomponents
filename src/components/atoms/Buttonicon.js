@@ -14,7 +14,7 @@ background-repeat: no-repeat;
 background-position: 50% 50%;
 background-size: 40%;
 border: none;
-background-color: ${({active}) => active === true ? 'white' : 'transparent'};
+background-color: ${({active}) => active === 'true' ? 'white' : 'transparent'};
 `;
 
 export default ButtonIcon;

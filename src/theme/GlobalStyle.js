@@ -7,12 +7,14 @@ const GlobalStyle = createGlobalStyle`
 }
 
 html {
-    font-size: 62,5%; // 1 rem = 10 px
+    font-size: 62.5%; // 1 rem = 10 px
+
 }
 
 body {
-    font-size: 1,6rem;
+    font-size: 1.6rem;
     font-family: "Montserrat", sans-serif;
+    
 }
 
 `
