@@ -5,7 +5,7 @@ import plus from '../../assets/icons/plus.svg'
 import twitter from '../../assets/icons/twitter.svg'
 import zarowa from '../../assets/icons/zarowa.svg'
 const ButtonIcon = styled.button`
-
+display: block;
 width: 67px;
 height: 67px;
 border-radius: 20px;

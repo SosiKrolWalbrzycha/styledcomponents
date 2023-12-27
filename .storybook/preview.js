@@ -1,6 +1,6 @@
-/** @type { import('@storybook/react').Preview } */
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 import { theme } from '../src/theme/mainTheme.js'; 
 
 const withThemeProvider = (Story, context) => {
@@ -10,6 +10,12 @@ const withThemeProvider = (Story, context) => {
     </ThemeProvider>
   );
 };
+
+const withRouter = (Story) => (
+  <BrowserRouter>
+    <Story />
+  </BrowserRouter>
+);
 
 const preview = {
   parameters: {
@@ -21,7 +27,7 @@ const preview = {
       },
     },
   },
-  decorators: [withThemeProvider],
+  decorators: [withThemeProvider, withRouter],
 };
 
 export default preview;
