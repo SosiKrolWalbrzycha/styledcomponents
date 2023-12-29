@@ -15,6 +15,7 @@ background-position: 50% 50%;
 background-size: 40%;
 border: none;
 background-color: ${({active}) => active === 'true' ? 'white' : 'transparent'};
+cursor: pointer;
 `;
 
 export default ButtonIcon;
