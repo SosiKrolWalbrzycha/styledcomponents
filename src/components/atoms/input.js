@@ -3,6 +3,7 @@ import magnifierIcon from '../../assets/icons/magnifier.svg'
 
 const Input = styled.input`
 	padding: 15px 30px;
+	margin-bottom: 20px;
 	font-size: 16px;
 	font-weight: ${theme => theme.regular};
 	background-color: ${({ theme }) => theme.grey100};
@@ -28,4 +29,4 @@ const Input = styled.input`
 		`}
 `
 
-export default Input
+export default Input;

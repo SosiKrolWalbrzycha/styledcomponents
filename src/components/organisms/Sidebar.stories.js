@@ -8,6 +8,6 @@ export default {
 	component: Sidebar,
 }
 
-export const Normal = () => <Sidebar/>
-export const Note = () => <Sidebar note/>
-export const Article= () => <Sidebar article/>
+export const Normal = () => <Sidebar pageType='twitter'/>
+export const Note = () => <Sidebar pageType='note'/>
+export const Article= () => <Sidebar pageType='article'/>

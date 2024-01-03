@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Paragraph from '../atoms/paragraph.js'
@@ -6,6 +7,7 @@ import SmallHeader from '../atoms/SmallHeader.js'
 import Button from '../atoms/Button.js'
 import AddInfoSmall from '../atoms/AddInfoSmall.js'
 import LinkIcon from '../../assets/icons/link.svg'
+import { useNavigate } from 'react-router-dom'
 
 const StyledWrapper = styled.div`
 	box-shadow: 0 10px 30px -5px hsla(0, 0%, 0%, 0.1);
@@ -14,6 +16,7 @@ const StyledWrapper = styled.div`
 	min-height: 300px;
 	display: grid;
 	grid-template-rows: 0.25fr 1fr;
+	cursor:pointer;
 `
 
 const InnerWrapper = styled.div`
@@ -35,7 +38,6 @@ const StyledLink = styled.a`
 	position: absolute;
 	right: 25px;
 	top: 25px;
-
 `
 
 const StyledAvatar = styled.img`
@@ -49,22 +51,36 @@ const StyledAvatar = styled.img`
 	z-index: 10;
 `
 
-const Card = ({ cardType }) => {
+const Card = ({ cardType, title, created, twitterName, articleUrl, content, key, id }) => {
+
+
+const[handleClick, setHandleClick] = useState(false)
+
+const handleCardClick = () => {
+	setHandleClick(true)
+}
+
+const navigate = useNavigate();
+
+if(handleClick && navigate(`/${cardType}/${id}`));
+
 	return (
-		<StyledWrapper>
+		<StyledWrapper onClick={handleCardClick}>
 			<InnerWrapper activeColor={cardType}>
-				<SmallHeader>Lorem ipsum dolor sit amet.</SmallHeader>
-				<AddInfoSmall>3 days</AddInfoSmall>
+				<SmallHeader>{title}</SmallHeader>
+				<AddInfoSmall>{created}</AddInfoSmall>
 				{cardType === 'twitter' && (
-					<StyledAvatar src='https://i.wpimg.pl/450x0/i.wp.pl/a/f/film/033/00/38/0413800.jpg' />
+					<StyledAvatar src={'https://i.wpimg.pl/450x0/i.wp.pl/a/f/film/033/00/38/0413800.jpg'} />
 				)}
-				{cardType === 'article' && <StyledLink />}
+				{cardType === 'article' && (
+					<StyledLink href={articleUrl} target='_blank' rel='noopener noreferrer'>
+					
+					</StyledLink>
+				)}
 			</InnerWrapper>
 			<InnerWrapper>
-				<Paragraph>
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni optio, delectus officia quasi sequi quaerat
-					libero tempore temporibus. Fuga, saepe.
-				</Paragraph>
+			<Paragraph>{id}</Paragraph>
+				<Paragraph>{content}</Paragraph>
 				<Button third>remove</Button>
 			</InnerWrapper>
 		</StyledWrapper>
@@ -73,10 +89,17 @@ const Card = ({ cardType }) => {
 
 Card.propTypes = {
 	cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+	title: PropTypes.string.isRequired,
+	created: PropTypes.string.isRequired,
+	twitterName: PropTypes.string,
+	articleUrl: PropTypes.string,
+	content: PropTypes.string.isRequired,
 }
 
 Card.defaultProps = {
 	cardType: 'note',
+	twitterName: null,
+	articleUrl: null,
 }
 
 export default Card

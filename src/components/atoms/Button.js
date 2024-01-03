@@ -18,28 +18,28 @@ const Button = styled.button`
     }
 
 
-	${({ twitter }) =>
-		twitter &&
+	${({ twitters }) =>
+		twitters &&
 		css`
-        background-color: ${({theme}) => theme.twitter}; 
+        background-color: ${({theme}) => theme.twitters}; 
         width: 105px;
 		font-size: 10px;
 		height: 30px;
 		`};
 
-	${({ article }) =>
-		article &&
+	${({ articles }) =>
+		articles &&
 		css`
-        background-color: ${({theme}) => theme.article}; 
+        background-color: ${({theme}) => theme.articles}; 
         width: 105px;
 		font-size: 10px;
 		height: 30px;
 		`};
 
-	${({ third }) =>
-		third &&
+	${({ notes }) =>
+		notes &&
 		css`
-        background-color: ${({theme}) => theme.grey200}; 
+        background-color: ${({theme}) => theme.notes}; 
         width: 105px;
 		font-size: 10px;
 		height: 30px;

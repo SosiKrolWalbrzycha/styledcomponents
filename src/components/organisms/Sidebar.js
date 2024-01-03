@@ -1,48 +1,61 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import { Link } from 'react-router-dom'
 import ButtonIcon from '../atoms/Buttonicon.js'
 import olowek from '../../assets/icons/olowek.svg'
 import exit from '../../assets/icons/exit.svg'
 import plus from '../../assets/icons/plus.svg'
+import { useLocation } from 'react-router-dom'
 import twitter from '../../assets/icons/twitter.svg'
 import zarowa from '../../assets/icons/zarowa.svg'
 import SidebarContainer from './SidebarContainer.js'
 import { LogoH1, LogoH2, Logo, SiedbarLinks, SiedbarLogout } from './SidebarContainer.js'
 
+const Sidebar = ({pageType}) => {
+	const location = useLocation()
 
+	return (
+		<SidebarContainer pageType={pageType}>
+			<Logo>
+				<LogoH1>FAV</LogoH1>
+				<LogoH2>NOTE.</LogoH2>
+			</Logo>
 
-const Sidebar = ({note, article}) => {
+			<p>{pageType}</p>
 
+			<SiedbarLinks>
+				<ButtonIcon
+					id='1'
+					as={Link}
+					to='/notes'
+					icon={olowek}
+					active={pageType === 'notes' ? 'true' : 'false'}
+					
+				/>
+				<ButtonIcon
+					id='2'
+					as={Link}
+					to='/twitters'
+					icon={twitter}
+					active={pageType === 'twitters' ? 'true' : 'false'}
+					
+				/>
 
-	const [activeButton, setActiveButton] = useState('/');
+				<ButtonIcon
+					id='3'
+					as={Link}
+					to='/articles'
+					icon={zarowa}
+					active={pageType === 'articles' ? 'true' : 'false'}
+				
+				/>
+			</SiedbarLinks>
 
-	const handleButtonClick = (path) => {
-	  // Akcja dla Storybook
-	  action('Button clicked')(path);
-  
-	  // Zmiana stanu aktywnego przycisku
-	  setActiveButton(path);
-	};
-
-
-
-	return (<SidebarContainer note={note} article={article}>
-		<Logo>
-			<LogoH1>FAV</LogoH1>
-			<LogoH2>NOTE.</LogoH2>
-		</Logo>
-
-		<SiedbarLinks>
-			<ButtonIcon as={Link} to='/' icon={olowek} active={'true'} />
-			<ButtonIcon as={Link} to='/twitters' icon={twitter} />
-			<ButtonIcon as={Link} to='/articles' icon={zarowa} />
-		</SiedbarLinks>
-
-		<SiedbarLogout>
-			<ButtonIcon as={Link} to='/' icon={exit} />
-		</SiedbarLogout>
-	</SidebarContainer>)
+			<SiedbarLogout>
+				<ButtonIcon as={Link} to='/login' icon={exit} />
+			</SiedbarLogout>
+		</SidebarContainer>
+	)
 }
 
 export default Sidebar

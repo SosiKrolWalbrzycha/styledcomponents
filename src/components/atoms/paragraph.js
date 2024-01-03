@@ -4,7 +4,7 @@ const Paragraph = styled.header`
 	font-style: normal;
 	font-weight: ${({ theme }) => theme.light};
 	font-size: 16px;
-	line-height: 49px;
+	line-height: 18px;
 	color: ${({ theme }) => theme.black};
 `
 
