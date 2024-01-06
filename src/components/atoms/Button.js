@@ -12,6 +12,7 @@ const Button = styled.button`
     text-transform: uppercase;
     cursor: pointer;
     transition: background-color .3s;
+	z-index: 200;
 
     &:hover {
         background-color: ${({ theme }) => theme.grey200}; 

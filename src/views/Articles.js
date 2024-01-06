@@ -1,75 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import UserTemplate from '../components/templates/UserTemplate.js'
 import Card from '../components/molecules/Card.js'
 
-const articlesFound = [
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		articleUrl: 'http://www.onet.pl',
-		created: '1 day',
-		id: 1,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		articleUrl: 'http://www.onet.pl',
-		created: '1 day',
-		id: 2,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		articleUrl: 'http://www.onet.pl',
-		created: '1 day',
-		id: 3,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		articleUrl: 'http://www.onet.pl',
-		created: '1 day',
-		id: 4,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		articleUrl: 'http://www.onet.pl',
-		created: '1 day',
-		id: 5,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		articleUrl: 'http://www.onet.pl',
-		created: '1 day',
-		id: 6,
-	},
-	
-]
-
-let articleId = 0
-
-const Articles = () => {
+const Articles = ({articles}) => {
 	return (
 		<>
 			<UserTemplate pageType='articles'>
 
 
-			{articlesFound.map(item => (
+			{articles.map(item => (
 					<Card
 						cardType='articles'
 						title={item.title}
 						created={item.created}
 						content={item.content}
 						articleUrl={item.articleUrl}
-						key={articleId++}
 						id={item.id}
 					/>
 				))}
@@ -82,4 +28,8 @@ const Articles = () => {
 	)
 }
 
-export default Articles;
+const mapStateToProps = state => {
+	return { articles: state.articles }
+}
+
+export default connect(mapStateToProps)(Articles)

@@ -8,6 +8,8 @@ import Button from '../atoms/Button.js'
 import AddInfoSmall from '../atoms/AddInfoSmall.js'
 import LinkIcon from '../../assets/icons/link.svg'
 import { useNavigate } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { removeItem } from '../../actions/index.js'
 
 const StyledWrapper = styled.div`
 	box-shadow: 0 10px 30px -5px hsla(0, 0%, 0%, 0.1);
@@ -17,6 +19,7 @@ const StyledWrapper = styled.div`
 	display: grid;
 	grid-template-rows: 0.25fr 1fr;
 	cursor:pointer;
+	z-index: 1;
 `
 
 const InnerWrapper = styled.div`
@@ -37,21 +40,21 @@ const StyledLink = styled.a`
 	background-size: contain;
 	position: absolute;
 	right: 25px;
-	top: 25px;
+	top: 20%;
 `
 
 const StyledAvatar = styled.img`
 	width: 86px;
 	height: 86px;
 	border-radius: 50px;
-	border: 5px solid ${({ theme }) => theme.twitter};
+	border: 5px solid ${({ theme }) => theme.twitters};
 	position: absolute;
 	right: 25px;
 	top: 25px;
 	z-index: 10;
 `
 
-const Card = ({ cardType, title, created, twitterName, articleUrl, content, key, id }) => {
+const Card = ({ cardType, title, created, twitterName, articleUrl, content, key, id, removeItemFunction }) => {
 
 
 const[handleClick, setHandleClick] = useState(false)
@@ -69,10 +72,10 @@ if(handleClick && navigate(`/${cardType}/${id}`));
 			<InnerWrapper activeColor={cardType}>
 				<SmallHeader>{title}</SmallHeader>
 				<AddInfoSmall>{created}</AddInfoSmall>
-				{cardType === 'twitter' && (
+				{cardType === 'twitters' && (
 					<StyledAvatar src={'https://i.wpimg.pl/450x0/i.wp.pl/a/f/film/033/00/38/0413800.jpg'} />
 				)}
-				{cardType === 'article' && (
+				{cardType === 'articles' && (
 					<StyledLink href={articleUrl} target='_blank' rel='noopener noreferrer'>
 					
 					</StyledLink>
@@ -81,7 +84,7 @@ if(handleClick && navigate(`/${cardType}/${id}`));
 			<InnerWrapper>
 			<Paragraph>{id}</Paragraph>
 				<Paragraph>{content}</Paragraph>
-				<Button third>remove</Button>
+				<Button onClick={(event) => { event.stopPropagation();removeItemFunction(cardType,id)}}>remove</Button>
 			</InnerWrapper>
 		</StyledWrapper>
 	)
@@ -94,6 +97,7 @@ Card.propTypes = {
 	twitterName: PropTypes.string,
 	articleUrl: PropTypes.string,
 	content: PropTypes.string.isRequired,
+	removeItem: PropTypes.func.isRequired,
 }
 
 Card.defaultProps = {
@@ -102,4 +106,9 @@ Card.defaultProps = {
 	articleUrl: null,
 }
 
-export default Card
+const mapDispatchToProps = dispatch => ({
+	removeItemFunction: (itemType, id) => dispatch(removeItem(itemType, id))
+	
+})
+
+export default connect (null, mapDispatchToProps)(Card)

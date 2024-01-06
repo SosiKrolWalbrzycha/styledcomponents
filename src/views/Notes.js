@@ -1,57 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import UserTemplate from '../components/templates/UserTemplate.js'
 import Card from '../components/molecules/Card.js'
 
-const notesFound = [
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
 
-		created: '1 day',
-		id: 1,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		created: '1 day',
-		id: 2,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		created: '1 day',
-		id: 3,
-	},
-	{
-		title: 'Lawina oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		created: '1 day',
-		id: 4,
-	},
-	{
-		title: 'Lawinaeee oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		created: '1 day',
-		id: 5,
-	},
-	{
-		title: 'Lawinatrt oburzenia po słowach Jana Pietrzaka.',
-		content:
-			'Podjęcie działań w związku ze słowami, jakie wypowiedział w Telewizji Republika Jan Pietrzak, zapowiedział Ośrodek Monitorowania Zachowań Rasistowskich',
-		created: '1 day',
-		id: 6,
-	},
-]
-let articleId = 0
 
-const Notes = () => (
+const Notes = ({notes}) => (
 	<UserTemplate pageType='notes'>
-		{notesFound.map(item => (
+		{notes.map(item => (
 			<Card
 				cardType='notes'
 				title={item.title}
@@ -64,4 +20,8 @@ const Notes = () => (
 	</UserTemplate>
 )
 
-export default Notes
+const mapStateToProps = state => {
+	return { notes: state.notes }
+}
+
+export default connect(mapStateToProps)(Notes)
