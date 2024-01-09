@@ -1,4 +1,5 @@
 import React from 'react'
+import { useContext } from 'react'
 import { Link, useLocation, useMatch } from 'react-router-dom'
 import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
@@ -10,6 +11,8 @@ import Button from '../atoms/Button.js'
 import Paragraph from '../atoms/paragraph.js'
 import AddInfoSmall from '../atoms/AddInfoSmall.js'
 import { routes } from '../../routes/index.js'
+import { AppContext } from '../../contexts/AppContext.js';
+
 
 const ContentWrapper = styled.div`
 	margin-left: 280px;
@@ -59,29 +62,28 @@ const StyledAvatar = styled.img`
 `
 
 const DetailsTemplate = ({ pageType }) => {
-	const matchNote = useMatch(routes.note)
-	const matchTwitter = useMatch(routes.twitter)
-	const matchArticle = useMatch(routes.article)
-	const isNote = matchNote != null
-	const isTwitter = matchTwitter != null
-	const isArticle = matchArticle != null
+
+	const location = useLocation()
+	const {appState, setCurrentPage} = useContext(AppContext)
+	setCurrentPage(location.pathname)
+
 
 	const buttonProps = {
-		twitters: pageType === 'twitters',
-		articles: pageType === 'articles',
-		notes: pageType === 'notes',
+		twitters: appState === 'twitters',
+		articles: appState === 'articles',
+		notes: appState === 'notes',
 	}
+
 
 	return (
 		<div>
+			
 			<GlobalStyle />
 			<ThemeProvider theme={theme}>
-				<Sidebar pageType={pageType} />
+				<Sidebar pageType={appState} />
 
-				<ContentWrapper isTwitter={isTwitter}>
-					{/* <p>Is note: {isNote ? 'true' : 'false'}</p>
-					<p>Is twitter: {isTwitter ? 'true' : 'false'}</p>
-					<p>Is article: {isArticle ? 'true' : 'false'}</p> */}
+				<ContentWrapper isTwitter={appState}>
+		
 
 					<ContentHeader>
 						<TitleHeader>
@@ -89,7 +91,7 @@ const DetailsTemplate = ({ pageType }) => {
 							<AddInfoSmall>CREATED - 25/03/2024</AddInfoSmall>
 						</TitleHeader>
 						<PhotoHeader>
-							{isTwitter && <StyledAvatar src={'https://i.wpimg.pl/450x0/i.wp.pl/a/f/film/033/00/38/0413800.jpg'} />}
+							{appState && <StyledAvatar src={'https://i.wpimg.pl/450x0/i.wp.pl/a/f/film/033/00/38/0413800.jpg'} />}
 						</PhotoHeader>
 					</ContentHeader>
 
@@ -112,9 +114,9 @@ const DetailsTemplate = ({ pageType }) => {
 
 					<ContentOpen>
 						<AddInfoSmall>
-							{pageType === 'twitters' && 'OPEN THIS TWITT'}
-							{pageType === 'notes' && ''}
-							{pageType === 'articles' && 'OPEN THIS ARTICLE'}
+							{appState === 'twitters' && 'OPEN THIS TWITT'}
+							{appState === 'notes' && 'This is only note'}
+							{appState === 'articles' && 'OPEN THIS ARTICLE'}
 						</AddInfoSmall>
 					</ContentOpen>
 
@@ -123,9 +125,9 @@ const DetailsTemplate = ({ pageType }) => {
 					</Link>
 					<RemoveNote>
 						<AddInfoSmall>
-							{pageType === 'twitters' && 'remove this twitt'}
-							{pageType === 'notes' && 'remove this note'}
-							{pageType === 'articles' && 'remove this article'}
+							{appState === 'twitters' && 'remove this twitt'}
+							{appState === 'notes' && 'remove this note'}
+							{appState === 'articles' && 'remove this article'}
 						</AddInfoSmall>
 					</RemoveNote>
 				</ContentWrapper>

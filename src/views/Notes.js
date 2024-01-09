@@ -15,6 +15,7 @@ const Notes = ({notes}) => (
 				content={item.content}
 				articleUrl={item.articleUrl}
 				id={item.id}
+				key={item.id}
 			/>
 		))}
 	</UserTemplate>

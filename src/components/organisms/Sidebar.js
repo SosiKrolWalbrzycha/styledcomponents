@@ -12,9 +12,14 @@ import SidebarContainer from './SidebarContainer.js'
 import { LogoH1, LogoH2, Logo, SiedbarLinks, SiedbarLogout } from './SidebarContainer.js'
 
 const Sidebar = ({pageType}) => {
-	const location = useLocation()
+	
+
+
+	
 
 	return (
+
+
 		<SidebarContainer pageType={pageType}>
 			<Logo>
 				<LogoH1>FAV</LogoH1>
@@ -58,4 +63,4 @@ const Sidebar = ({pageType}) => {
 	)
 }
 
-export default Sidebar
+export default Sidebar;

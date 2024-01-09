@@ -12,7 +12,9 @@ const Twitters = ({ twitters }) => (
 			title={item.title} 
 			created={item.created} 
 			content={item.content}
-			twitterName={item.twitterName} />
+			twitterName={item.twitterName}
+			key={item.id} />
+			
 		))}
 	</UserTemplate>
 )
